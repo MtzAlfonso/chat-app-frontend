@@ -1,0 +1,36 @@
+.auth__background {
+  @apply min-h-screen;
+  @apply flex;
+  @apply items-center;
+  @apply justify-center;
+  @apply bg-gradient-to-b;
+  @apply from-indigo-300;
+  @apply dark:from-gray-800;
+  @apply to-purple-300;
+  @apply dark:to-gray-800;
+  @apply py-12;
+  @apply px-4;
+  @apply sm:px-6;
+  @apply lg:px-8;
+}
+.auth__card {
+  @apply max-w-md;
+  @apply w-full;
+  @apply space-y-8;
+  @apply shadow-lg;
+  @apply rounded-2xl;
+  @apply py-10;
+  @apply px-5;
+  @apply sm:px-10;
+  @apply bg-gray-100;
+  @apply dark:bg-gray-900;
+}
+
+.auth__title {
+  @apply mt-5;
+  @apply text-center;
+  @apply text-3xl;
+  @apply font-extrabold;
+  @apply text-gray-900;
+  @apply dark:text-gray-200;
+}

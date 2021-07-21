@@ -1,0 +1,65 @@
+.chats_list {
+  @apply max-w-7xl mx-auto px-2 sm:px-6 lg:px-8;
+}
+
+.chats_people {
+  @apply flex;
+  @apply items-center;
+  @apply py-1;
+  @apply border-b-0;
+  @apply lg:border-b-2;
+  @apply px-2;
+  @apply border-gray-300 dark:border-gray-900;
+}
+
+.chats_img {
+  @apply flex;
+  @apply items-center;
+  @apply h-11;
+  @apply w-11;
+  @apply sm:h-16;
+  @apply sm:w-16;
+  @apply rounded-full;
+  @apply relative;
+}
+
+.chats_ib {
+  @apply w-full;
+  @apply hidden;
+  @apply lg:inline-block;
+  @apply pl-2;
+  @apply text-gray-900;
+  @apply dark:text-white;
+  @apply text-left;
+}
+.chats_contact {
+  @apply flex;
+  @apply justify-between;
+  @apply text-lg;
+  @apply font-semibold;
+  @apply text-sm;
+}
+
+.chats_date {
+  @apply mr-3;
+}
+
+/*  */
+
+.chat_img {
+  @apply h-10;
+  @apply w-10;
+  @apply sm:h-14;
+  @apply sm:w-14;
+  @apply mx-3;
+}
+
+.message__txt--send {
+  @apply bg-indigo-500 dark:bg-indigo-600 text-white p-4 h-auto ml-auto;
+  @apply rounded-t-2xl rounded-bl-2xl text-sm sm:text-base;
+}
+
+.message__txt--received {
+  @apply bg-gray-200 dark:bg-gray-900 p-4 h-auto dark:text-white;
+  @apply rounded-b-2xl rounded-tr-2xl text-sm sm:text-base;
+}
