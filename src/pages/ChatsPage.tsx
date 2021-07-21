@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { FormEventHandler } from 'react';
 import { FormContainer } from '../components/auth/FormContainer';
 import { FormInput } from '../components/auth/FormInput';
 import { FormInputIcon } from '../components/auth/FormInputIcon';
