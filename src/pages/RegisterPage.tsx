@@ -1,4 +1,5 @@
-import { FormEvent } from 'react';
+import Swal from 'sweetalert2';
+import { ChangeEvent, FormEvent, useContext, useState } from 'react';
 
 import { Card } from '../components/auth/Card';
 import { FormButton } from '../components/auth/FormButton';
@@ -11,11 +12,45 @@ import { FormInputIcon } from '../components/auth/FormInputIcon';
 import { FormInput } from '../components/auth/FormInput';
 import { CardFooter } from '../components/auth/CardFooter';
 import { CardLink } from '../components/auth/CardLink';
+import { AuthContext } from '../auth/AuthContext';
+
+const initialState: FormRegister = {
+  name: '',
+  email: '',
+  password: '',
+};
 
 const RegisterPage = () => {
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const { register } = useContext(AuthContext);
+
+  const [form, setForm] = useState(initialState);
+
+  const onChange = ({ target }: ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = target;
+    setForm({ ...form, [name]: value });
   };
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
+    event.preventDefault();
+
+    const { name, email, password } = form;
+
+    const ok = await register(name, email, password);
+
+    !ok &&
+      Swal.fire({
+        title: 'Error',
+        icon: 'error',
+        text: 'El email ya está registrado',
+      });
+  };
+
+  const formIsValid = (): boolean => {
+    return (
+      form.name.length > 3 && form.email.length > 0 && form.password.length > 3
+    );
+  };
+
   return (
     <AuthLayout>
       <Card className="animate__animated animate__flipInY">
@@ -33,7 +68,9 @@ const RegisterPage = () => {
               required
               type="text"
               placeholder="Nombre"
-              // onChange={onchange}
+              name="name"
+              value={form.name}
+              onChange={onChange}
             />
           </FormContainer>
           <FormContainer>
@@ -42,7 +79,9 @@ const RegisterPage = () => {
               required
               type="email"
               placeholder="Email"
-              // onChange={onchange}
+              name="email"
+              value={form.email}
+              onChange={onChange}
             />
           </FormContainer>
           <FormContainer>
@@ -51,10 +90,14 @@ const RegisterPage = () => {
               required
               type="password"
               placeholder="Password"
-              // onChange={onchange}
+              name="password"
+              value={form.password}
+              onChange={onChange}
             />
           </FormContainer>
-          <FormButton type="submit">Crear cuenta</FormButton>
+          <FormButton type="submit" disabled={!formIsValid()}>
+            Crear cuenta
+          </FormButton>
         </Form>
         <CardFooter>
           <hr />

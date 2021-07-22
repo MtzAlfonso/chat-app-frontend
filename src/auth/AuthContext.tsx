@@ -52,7 +52,34 @@ export const AuthProvider = ({ children }: Props) => {
     return ok;
   };
 
-  const register = (name: string, email: string, password: string) => {};
+  const register = async (
+    name: string,
+    email: string,
+    password: string
+  ): Promise<boolean> => {
+    const response = await fetchWithoutToken(
+      'login/new',
+      { name, email, password },
+      'POST'
+    );
+
+    const { ok, user, token } = response;
+
+    if (ok) {
+      localStorage.setItem('token', token);
+      console.log(user);
+      setAuth({
+        uid: user.uid,
+        checking: false,
+        isAuthenticated: true,
+        name: user.name,
+        email: user.email,
+      });
+    }
+    console.log(`isAuthenticated: ${auth.isAuthenticated}`);
+
+    return ok;
+  };
 
   // const verifyToken = useCallback(() => {}, []);
 

@@ -60,7 +60,7 @@ const LoginPage = () => {
   };
 
   const formIsValid = (): boolean => {
-    return form.email.length > 0 && form.password.length > 4;
+    return form.email.length > 0 && form.password.length > 3;
   };
 
   return (

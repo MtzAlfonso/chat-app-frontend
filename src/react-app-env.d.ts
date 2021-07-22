@@ -6,9 +6,15 @@ type FormLogin = {
   remember?: boolean;
 };
 
+type FormRegister = {
+  name: string;
+  email: FormLogin['email'];
+  password: FormLogin['password'];
+};
+
 type AuthContextState = {
   login: (email: string, password: string) => Promise<boolean>;
-  register: (name: string, email: string, password: string) => void;
+  register: (name: string, email: string, password: string) => Promise<boolean>;
   // verifyToken,
   logout: () => void;
   auth: AuthState;

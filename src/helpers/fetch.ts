@@ -2,7 +2,7 @@ const baseUrl = process.env.REACT_APP_API_URL;
 
 export const fetchWithoutToken = async (
   endpoint: string,
-  data: FormLogin,
+  data: FormLogin | FormRegister,
   method: string = 'GET'
 ): Promise<AuthLoginResponse> => {
   const url = `${baseUrl}/${endpoint}`;
