@@ -9,7 +9,7 @@ const Menu = styled.div`
   background-color: var(--gray-900);
   bottom: 0;
   display: flex;
-  height: 10vh;
+  height: 4rem;
   justify-content: space-around;
   position: fixed;
   width: 100%;
@@ -46,7 +46,7 @@ export const AppMenu = (props: Props) => {
         <MenuIcon className="fas fa-user-friends" title="Amigos" />
       </MenuItem>
 
-      <MenuItem to="/chats" exact activeClassName="active" title="Chats">
+      <MenuItem to="/chats" activeClassName="active" title="Chats">
         <MenuIcon className="fas fa-comments" />
       </MenuItem>
 

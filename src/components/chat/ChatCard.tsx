@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 interface Props {
-  to?: string;
+  user?: string;
   online?: boolean;
   notifications?: number;
 }
@@ -13,23 +13,31 @@ interface StyledProps {
 }
 
 const ChatResume = styled(Link)`
-  cursor: pointer;
-  text-decoration: none;
-  display: flex;
-  background: var(--indigo-100);
+  background: var(--indigo-50);
   border-radius: 10px;
+  box-shadow: 0 3px 5px -2px var(--gray-400);
   color: var(--indigo-900);
+  cursor: pointer;
+  display: flex;
   padding: 1rem 0.7rem;
   margin: 1rem 0;
+  text-decoration: none;
   &:hover {
-    background-color: var(--gray-700);
+    background-color: var(--indigo-100);
   }
   &:active {
-    background-color: var(--gray-600);
+    background-color: var(--white);
   }
   @media (prefers-color-scheme: dark) {
     background: var(--gray-900);
+    box-shadow: 0 3px 5px -2px var(--gray-900);
     color: var(--gray-50);
+    &:hover {
+      background-color: var(--gray-700);
+    }
+    &:active {
+      background-color: var(--gray-600);
+    }
   }
 `;
 
@@ -61,7 +69,10 @@ const ImgContainer = styled.div`
 
 export const ChatCard = (props: Props) => {
   return (
-    <ChatResume to="#!" className="animate__animated animate__fadeIn">
+    <ChatResume
+      to={`/chats/${props.user}`}
+      className="animate__animated animate__fadeIn"
+    >
       <ImgContainer online={props.online}>
         <img
           src="https://ptetutorials.com/images/user-profile.png"

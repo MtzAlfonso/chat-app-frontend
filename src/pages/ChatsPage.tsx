@@ -33,13 +33,13 @@ const ChatsPage = (props: Props) => {
           <FormInput type="text" name="" placeholder="Buscar..." />
         </FormContainer>
       </form>
-      <ChatCard to="#!" online />
-      <ChatCard to="#!" online />
-      <ChatCard to="#!" />
-      <ChatCard to="#!" />
-      <ChatCard to="#!" />
-      <ChatCard to="#!" />
-      <ChatCard to="#!" />
+      <ChatCard user="user1" online />
+      <ChatCard user="user2" online />
+      <ChatCard user="user3" />
+      <ChatCard user="user4" />
+      <ChatCard user="user5" />
+      <ChatCard user="user6" />
+      <ChatCard user="user7" />
     </Content>
   );
 };
