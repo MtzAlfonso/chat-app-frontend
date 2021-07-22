@@ -1,54 +1,55 @@
-// import { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { createContext } from 'react';
 import { fetchWithoutToken } from '../helpers/fetch';
-
-// interface IStateSchema {
-//   uid: string | null;
-//   checking: boolean;
-//   loggedIn: boolean;
-//   name: string | null;
-//   email: string | null;
-// }
-
-export interface IAuthContext {
-  login?: (email: string, password: string) => Promise<void>;
-  register?: () => Promise<void>;
-  // verifyToken,
-  logout?: () => Promise<void>;
-}
 
 interface Props {
   children: JSX.Element | JSX.Element[];
 }
 
-// const initialState: IStateSchema = {
-//   uid: null,
-//   checking: true,
-//   loggedIn: false,
-//   name: null,
-//   email: null,
-// };
+const initialState: AuthState = {
+  uid: null,
+  checking: true,
+  isAuthenticated: false,
+  name: null,
+  email: null,
+};
 
 const contextDefaultValues: AuthContextState = {
-  login: () => {},
-  register: () => {},
-  logout: () => {},
+  login: async () => false,
+  register: async () => false,
+  logout: async () => false,
+  auth: initialState,
 };
 
 export const AuthContext =
   createContext<AuthContextState>(contextDefaultValues);
 
 export const AuthProvider = ({ children }: Props) => {
-  // const [auth, setAuth] = useState(initialState);
+  const [auth, setAuth] = useState(initialState);
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string): Promise<boolean> => {
     const response = await fetchWithoutToken(
       'login',
       { email, password },
       'POST'
     );
 
-    console.log(response);
+    const { ok, user, token } = response;
+
+    if (ok) {
+      localStorage.setItem('token', token);
+      console.log(user);
+      setAuth({
+        uid: user.uid,
+        checking: false,
+        isAuthenticated: true,
+        name: user.name,
+        email: user.email,
+      });
+    }
+    console.log(`isAuthenticated: ${auth.isAuthenticated}`);
+
+    return ok;
   };
 
   const register = (name: string, email: string, password: string) => {};
@@ -64,6 +65,7 @@ export const AuthProvider = ({ children }: Props) => {
         register,
         // verifyToken,
         logout,
+        auth,
       }}
     >
       {children}

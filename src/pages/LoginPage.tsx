@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 import { Card } from '../components/auth/Card';
 import { FormButton } from '../components/auth/FormButton';
@@ -14,13 +15,7 @@ import { CardFooter } from '../components/auth/CardFooter';
 import { Checkbox, InputCheckbox } from '../components/auth/Checkbox';
 import { AuthContext } from '../auth/AuthContext';
 
-interface IState {
-  email: string;
-  password: string;
-  remember: boolean;
-}
-
-const initialState: IState = {
+const initialState: FormLogin = {
   email: '',
   password: '',
   remember: false,
@@ -36,16 +31,16 @@ const LoginPage = () => {
     email && setForm((form) => ({ ...form, email, remember: true }));
   }, []);
 
-  const toggleCheck = () => {
+  const toggleCheck = (): void => {
     setForm({ ...form, remember: !form.remember });
   };
 
-  const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+  const onChange = ({ target }: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = target;
     setForm({ ...form, [name]: value });
   };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
     const { email, password, remember } = form;
@@ -54,7 +49,18 @@ const LoginPage = () => {
       ? localStorage.setItem('email', form.email)
       : localStorage.removeItem('email');
 
-    login(email, password);
+    const ok = await login(email, password);
+
+    !ok &&
+      Swal.fire({
+        title: 'Error',
+        icon: 'error',
+        text: 'Verifique usuario y/o contraseña',
+      });
+  };
+
+  const formIsValid = (): boolean => {
+    return form.email.length > 0 && form.password.length > 4;
   };
 
   return (
@@ -106,7 +112,9 @@ const LoginPage = () => {
               <label>Recuérdame</label>
             </InputCheckbox>
           </Checkbox>
-          <FormButton type="submit">Iniciar sesión</FormButton>
+          <FormButton type="submit" disabled={!formIsValid()}>
+            Iniciar sesión
+          </FormButton>
         </Form>
         <CardFooter>
           <hr />
