@@ -1,24 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from 'react-router-dom';
+import { AuthContext } from '../auth/AuthContext';
 import { LoaderScreen } from '../components/ui/LoaderScreen';
 import { AuthRouter } from './AuthRouter';
 import { ChatRouter } from './ChatRouter';
 
-export const AppRouter = (): JSX.Element => {
-  const [checking, setChecking] = useState(true);
+export const AppRouter = () => {
+  const { auth, verifyToken } = useContext(AuthContext);
 
   useEffect(() => {
-    setTimeout(() => {
-      setChecking(false);
-    }, 2000);
-  }, []);
+    verifyToken();
+  }, [verifyToken]);
 
-  if (checking) {
+  if (auth.checking) {
     return <LoaderScreen />;
   }
   return (

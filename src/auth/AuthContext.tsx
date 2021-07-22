@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { createContext } from 'react';
-import { fetchWithoutToken } from '../helpers/fetch';
+import { fetchWithoutToken, fetchWithToken } from '../helpers/fetch';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -18,6 +18,7 @@ const contextDefaultValues: AuthContextState = {
   login: async () => false,
   register: async () => false,
   logout: async () => false,
+  verifyToken: async () => false,
   auth: initialState,
 };
 
@@ -47,7 +48,6 @@ export const AuthProvider = ({ children }: Props) => {
         email: user.email,
       });
     }
-    console.log(`isAuthenticated: ${auth.isAuthenticated}`);
 
     return ok;
   };
@@ -81,7 +81,40 @@ export const AuthProvider = ({ children }: Props) => {
     return ok;
   };
 
-  // const verifyToken = useCallback(() => {}, []);
+  const verifyToken: () => Promise<boolean> =
+    useCallback(async (): Promise<boolean> => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setAuth({
+          ...initialState,
+          checking: false,
+          isAuthenticated: false,
+        });
+        return false;
+      }
+
+      const response = await fetchWithToken('login/renew');
+      const { ok, user } = response;
+
+      if (ok) {
+        localStorage.setItem('token', token);
+        setAuth({
+          uid: user.uid,
+          checking: false,
+          isAuthenticated: true,
+          name: user.name,
+          email: user.email,
+        });
+        return true;
+      } else {
+        setAuth({
+          ...initialState,
+          checking: false,
+          isAuthenticated: false,
+        });
+        return false;
+      }
+    }, []);
 
   const logout = () => {};
 
@@ -90,7 +123,7 @@ export const AuthProvider = ({ children }: Props) => {
       value={{
         login,
         register,
-        // verifyToken,
+        verifyToken,
         logout,
         auth,
       }}

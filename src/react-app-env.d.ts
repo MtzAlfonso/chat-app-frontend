@@ -15,7 +15,7 @@ type FormRegister = {
 type AuthContextState = {
   login: (email: string, password: string) => Promise<boolean>;
   register: (name: string, email: string, password: string) => Promise<boolean>;
-  // verifyToken,
+  verifyToken: () => Promise<boolean>;
   logout: () => void;
   auth: AuthState;
 };
