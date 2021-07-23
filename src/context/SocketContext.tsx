@@ -17,7 +17,7 @@ export const SocketContext = createContext<SocketContextState>(initialState);
 
 export const SocketProvider = ({ children }: Props) => {
   const { socket, online, connectSocket, disconnectSocket } = useSocket(
-    'http://localhost:4000'
+    process.env.REACT_APP_SOCKET_URL || 'http://localhost:4000'
   );
   const { auth } = useContext(AuthContext);
 
