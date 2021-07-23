@@ -35,7 +35,10 @@ const TimeStamps = styled.div`
 export const MessageReceived = (props: Props) => {
   return (
     <ContainerFlex>
-      <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" />
+      <img
+        src="https://image.flaticon.com/icons/png/512/168/168724.png"
+        alt="sunil"
+      />
       <div>
         <TextReceived>
           Hey, Marshall! How are you? Can you please change the color theme of

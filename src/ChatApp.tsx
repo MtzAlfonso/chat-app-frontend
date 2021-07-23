@@ -1,12 +1,15 @@
 import { AppRouter } from './router/AppRouter';
-import { AuthProvider } from './auth/AuthContext';
+import { AuthProvider } from './context/AuthContext';
+import { SocketProvider } from './context/SocketContext';
 
 import 'animate.css';
 
 const ChatApp = () => {
   return (
     <AuthProvider>
-      <AppRouter />
+      <SocketProvider>
+        <AppRouter />
+      </SocketProvider>
     </AuthProvider>
   );
 };

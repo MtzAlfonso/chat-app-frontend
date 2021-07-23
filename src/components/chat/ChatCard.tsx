@@ -75,7 +75,7 @@ export const ChatCard = (props: Props) => {
     >
       <ImgContainer online={props.online}>
         <img
-          src="https://ptetutorials.com/images/user-profile.png"
+          src="https://image.flaticon.com/icons/png/512/168/168724.png"
           alt="Avatar"
         />
       </ImgContainer>

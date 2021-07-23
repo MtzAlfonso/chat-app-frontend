@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
-import { AuthContext } from '../auth/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 import { LoaderScreen } from '../components/ui/LoaderScreen';
 import { AuthRouter } from './AuthRouter';
 import { ChatRouter } from './ChatRouter';

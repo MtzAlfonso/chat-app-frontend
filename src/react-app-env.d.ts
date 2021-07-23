@@ -39,6 +39,13 @@ type AuthLoginResponse = {
   token: string;
 };
 
+type SocketContextState = {
+  online: boolean;
+  socket: SocketIOClient.Socket;
+  connectSocket: () => void;
+  disconnectSocket: () => void;
+};
+
 type CustomRoute = {
   isAuthenticated: boolean;
   path: string;

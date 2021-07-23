@@ -13,7 +13,7 @@ import { FormInputIcon } from '../components/auth/FormInputIcon';
 import { CardLink } from '../components/auth/CardLink';
 import { CardFooter } from '../components/auth/CardFooter';
 import { Checkbox, InputCheckbox } from '../components/auth/Checkbox';
-import { AuthContext } from '../auth/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 
 const initialState: FormLogin = {
   email: '',

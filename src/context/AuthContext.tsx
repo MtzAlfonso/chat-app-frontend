@@ -115,7 +115,14 @@ export const AuthProvider = ({ children }: Props) => {
       }
     }, []);
 
-  const logout = () => {};
+  const logout = () => {
+    localStorage.removeItem('token');
+    setAuth({
+      ...initialState,
+      checking: false,
+      isAuthenticated: false,
+    });
+  };
 
   return (
     <AuthContext.Provider

@@ -52,7 +52,7 @@ export const AppMenu = (props: Props) => {
         </MenuItem>
         <MenuItem to="/perfil" title="Perfil">
           <ProfileImg
-            src="https://ptetutorials.com/images/user-profile.png"
+            src="https://image.flaticon.com/icons/png/512/168/168724.png"
             alt="sunil"
           />
         </MenuItem>

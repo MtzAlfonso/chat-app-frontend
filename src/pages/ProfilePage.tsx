@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import { FormContainer } from '../components/auth/FormContainer';
 import { FormInput } from '../components/auth/FormInput';
 import { FormInputIcon } from '../components/auth/FormInputIcon';
@@ -96,6 +98,8 @@ const LogoutButton = styled.button`
 `;
 
 const ProfilePage = (props: Props) => {
+  const { auth, logout } = useContext(AuthContext);
+
   return (
     <ProfileContainer className="animate__animated animate__fadeIn">
       <ProfileInfo>
@@ -107,11 +111,11 @@ const ProfilePage = (props: Props) => {
           ></path>
         </svg>
         <ProfileImg
-          src="https://ptetutorials.com/images/user-profile.png"
+          src="https://image.flaticon.com/icons/png/512/168/168724.png"
           alt="sunil"
         />
-        <h4>William Wright</h4>
-        <LogoutButton>
+        <h4>{auth.name}</h4>
+        <LogoutButton onClick={logout}>
           <i className="fas fa-sign-out-alt" />
           Cerrar sesión
         </LogoutButton>

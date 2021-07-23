@@ -12,7 +12,7 @@ import { FormInputIcon } from '../components/auth/FormInputIcon';
 import { FormInput } from '../components/auth/FormInput';
 import { CardFooter } from '../components/auth/CardFooter';
 import { CardLink } from '../components/auth/CardLink';
-import { AuthContext } from '../auth/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 
 const initialState: FormRegister = {
   name: '',
