@@ -1,14 +1,11 @@
 import { useContext, useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthContext';
 import { LoaderScreen } from '../components/ui/LoaderScreen';
 import { AuthRouter } from './AuthRouter';
 import { ChatRouter } from './ChatRouter';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
 
 export const AppRouter = () => {
   const { auth, verifyToken } = useContext(AuthContext);
@@ -25,8 +22,16 @@ export const AppRouter = () => {
       <Router>
         <div>
           <Switch>
-            <Route path="/auth" component={AuthRouter} />
-            <Route path="/" component={ChatRouter} />
+            <PublicRoute
+              isAuthenticated={auth.isAuthenticated}
+              component={AuthRouter}
+              path="/auth"
+            />
+            <PrivateRoute
+              isAuthenticated={auth.isAuthenticated}
+              path="/"
+              component={ChatRouter}
+            />
             <Redirect to="/" />
           </Switch>
         </div>

@@ -38,3 +38,9 @@ type AuthLoginResponse = {
   };
   token: string;
 };
+
+type CustomRoute = {
+  isAuthenticated: boolean;
+  path: string;
+  component: React.ComponentType<any>;
+};

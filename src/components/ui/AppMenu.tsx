@@ -17,6 +17,7 @@ const Menu = styled.div`
 
 const MenuItem = styled(NavLink)`
   color: var(--gray-100);
+  position: relative;
   &.active {
     color: var(--indigo-500);
   }
@@ -41,21 +42,21 @@ const ProfileImg = styled.img`
 
 export const AppMenu = (props: Props) => {
   return (
-    <Menu>
-      <MenuItem to="/amigos" exact activeClassName="active">
-        <MenuIcon className="fas fa-user-friends" title="Amigos" />
-      </MenuItem>
-
-      <MenuItem to="/chats" activeClassName="active" title="Chats">
-        <MenuIcon className="fas fa-comments" />
-      </MenuItem>
-
-      <MenuItem to="/perfil" title="Perfil">
-        <ProfileImg
-          src="https://ptetutorials.com/images/user-profile.png"
-          alt="sunil"
-        />
-      </MenuItem>
-    </Menu>
+    <>
+      <Menu>
+        <MenuItem to="/amigos" exact activeClassName="active">
+          <MenuIcon className="fas fa-user-friends" title="Amigos" />
+        </MenuItem>
+        <MenuItem to="/chats" activeClassName="active" title="Chats">
+          <MenuIcon className="fas fa-comments" />
+        </MenuItem>
+        <MenuItem to="/perfil" title="Perfil">
+          <ProfileImg
+            src="https://ptetutorials.com/images/user-profile.png"
+            alt="sunil"
+          />
+        </MenuItem>
+      </Menu>
+    </>
   );
 };

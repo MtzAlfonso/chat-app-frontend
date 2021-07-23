@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }: Props) => {
 
     if (ok) {
       localStorage.setItem('token', token);
-      console.log(user);
+
       setAuth({
         uid: user.uid,
         checking: false,
@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }: Props) => {
 
     if (ok) {
       localStorage.setItem('token', token);
-      console.log(user);
+
       setAuth({
         uid: user.uid,
         checking: false,
@@ -76,7 +76,6 @@ export const AuthProvider = ({ children }: Props) => {
         email: user.email,
       });
     }
-    console.log(`isAuthenticated: ${auth.isAuthenticated}`);
 
     return ok;
   };
