@@ -1,15 +1,19 @@
 import { useCallback, useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
+import { serializeToken } from '../helpers/serializeToken';
 
 export const useSocket = (serverPath: string): SocketContextState => {
   const [socket, setSocket] = useState<Socket>(io);
   const [online, setOnline] = useState(false);
 
   const connectSocket = useCallback(() => {
+    const token = localStorage.getItem('token');
+
     const socketTemp = io(serverPath, {
       transports: ['websocket'],
       autoConnect: true,
       forceNew: true,
+      query: { 'x-token': serializeToken(token) },
     });
     setSocket(socketTemp);
   }, [serverPath]);
